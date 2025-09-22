@@ -1,0 +1,62 @@
+[package]
+name = "o3storage"
+version = "0.1.0"
+edition = "2021"
+authors = ["O3Storage Team"]
+description = "Distributed immutable object storage system with S3-compatible API"
+
+[dependencies]
+tokio = { version = "1.0", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+uuid = { version = "1.0", features = ["v4"] }
+sha2 = "0.10"
+blake3 = "1.5"
+hyper = { version = "1.0", features = ["full"] }
+axum = "0.7"
+tower = "0.4"
+tower-http = { version = "0.5", features = ["cors", "trace"] }
+tracing = "0.1"
+tracing-subscriber = "0.3"
+clap = { version = "4.0", features = ["derive"] }
+anyhow = "1.0"
+thiserror = "1.0"
+bincode = "1.3"
+futures = "0.3"
+async-trait = "0.1"
+bytes = "1.0"
+chrono = { version = "0.4", features = ["serde"] }
+openssl = { version = "0.10", features = ["vendored"] }
+rand = "0.8"
+crossbeam = "0.8"
+
+# Workspace member dependencies
+storage = { path = "storage" }
+consensus = { path = "consensus" }
+api = { path = "api" }
+network = { path = "network" }
+system = { path = "system" }
+
+# SQLite removed - using Parquet for metadata storage
+
+[target.'cfg(target_arch = "aarch64")'.dependencies]
+libc = "0.2"
+
+[[bin]]
+name = "o3storage"
+path = "src/main.rs"
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+
+[workspace]
+members = [
+    "storage",
+    "consensus", 
+    "api",
+    "network",
+    "system"
+]

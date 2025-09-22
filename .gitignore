@@ -1,0 +1,39 @@
+# Rust
+/target/
+**/*.rs.bk
+Cargo.lock
+
+# OS build artifacts
+*.bin
+*.img
+*.iso
+bootimage-*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+/os/target/
+/storage/target/
+/network/target/
+/consensus/target/
+/api/target/
+/system/target/
+
+# Runtime files
+*.log
+*.db
+*.db-*
+data/
+logs/
+
+# Test artifacts
+test-results/
+coverage/
