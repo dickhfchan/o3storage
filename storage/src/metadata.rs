@@ -112,11 +112,11 @@ impl MetadataStore {
             .map_err(|e| StorageError::Io(e))?;
         
         let props = WriterProperties::builder().build();
-        let mut writer = ArrowWriter::try_new(file, schema.clone(), Some(props))
+        let mut writer = ArrowWriter::try_new(file, schema.clone().into(), Some(props))
             .map_err(|e| StorageError::Database(format!("Failed to create parquet writer: {}", e)))?;
 
         // Write empty batch to create the file structure
-        let empty_batch = RecordBatch::new_empty(schema.clone());
+        let empty_batch = RecordBatch::new_empty(schema.clone().into());
         writer.write(&empty_batch)
             .map_err(|e| StorageError::Database(format!("Failed to write empty batch: {}", e)))?;
             

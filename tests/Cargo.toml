@@ -1,0 +1,57 @@
+[package]
+name = "o3storage-tests"
+version = "0.1.0"
+edition = "2021"
+authors = ["O3Storage Team"]
+description = "Comprehensive test suite for O3Storage distributed system"
+
+[[bin]]
+name = "cluster-test"
+path = "src/cluster_test.rs"
+
+[dependencies]
+# Test framework
+tokio = { version = "1.0", features = ["full"] }
+tokio-test = "0.4"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# HTTP client for API testing
+reqwest = { version = "0.11", features = ["json"] }
+
+# Testing utilities
+criterion = { version = "0.5", features = ["html_reports"] }
+proptest = "1.4"
+quickcheck = "1.0"
+
+# Metrics and monitoring
+prometheus = { version = "0.13", features = ["process"] }
+
+# Async utilities
+futures = "0.3"
+async-trait = "0.1"
+
+# Logging for tests
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# Random data generation
+rand = "0.8"
+uuid = { version = "1.0", features = ["v4"] }
+
+# Time utilities
+chrono = { version = "0.4", features = ["serde"] }
+
+# Local workspace dependencies
+o3storage = { path = ".." }
+
+[dev-dependencies]
+tempfile = "3.8"
+mockall = "0.12"
+
+[features]
+default = []
+cluster-sim = []
+performance = []
+security-audit = []
+
