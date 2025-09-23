@@ -58,5 +58,6 @@ members = [
     "consensus", 
     "api",
     "network",
-    "system"
+    "system",
+    "tests"
 ]
